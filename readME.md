@@ -3,6 +3,8 @@
 ## Github Repo
 [https://github.com/nappilil/CS546-Final-Project](https://github.com/nappilil/CS546-Final-Project)
 
+![Grocery Genie Example](public/assets/grocery-genie.png)
+
 ## Team Members
 - Aditi Deshmukh
 - Shannon McGratty
