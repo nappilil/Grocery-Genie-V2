@@ -1,23 +1,25 @@
 <div class="form">
-  <h1>{{pageTitle}}</h1>
   <div class="login">
+    <h1>{{pageTitle}}</h1>
     <p>Please Enter Details Here:</p>
     <form action="/users/login" method="POST" class="login-form" id="login-form">
       <div>
-      <label for="email">
-        <input type="text" name="email" placeholder="Email Address" value="{{user.email}}" id="email">
-      </label> <div id = "eerror" class = "error"></div>
+        <label for="email">
+          <input type="text" name="email" placeholder="Email Address" value="{{user.email}}" id="email">
+        </label>
+        <div id="eerror" class="error"></div>
       </div>
       <div>
-      <label for="password">
-        <input type="password" name="password" placeholder="Password" value="{{user.password}}" id="password">
-      </label> <div id = "perror" class = "error"></div>
+        <label for="password">
+          <input type="password" name="password" placeholder="Password" value="{{user.password}}" id="password">
+        </label>
+        <div id="perror" class="error"></div>
       </div>
-      <div id = "error_div" class = "error"> </div>
+      <div id="error_div" class="error"> </div>
       <input type="submit" id="submit-button">
       <input type="reset" id="reset-button">
     </form>
-    <script src = "/public/js/log_in.js"></script>
+    <script src="/public/js/log_in.js"></script>
   </div>
   {{#if hasErrors}}
   <ul class="error-list">
