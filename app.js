@@ -345,6 +345,27 @@ app.use('/groceryLists/delete', async (req, res, next) => {
   }
 });
 
+app.get('/groceryLists/search', async (req, res) => {
+  try {
+    const query = req.query.query;
+    if (!query || query.trim() === '') {
+      throw 'Error: Search query cannot be empty or just spaces';
+    }
+    
+    const searchQuery = query.toLowerCase();
+    
+    const allLists = await getAllGroceryLists();
+
+    const matchingLists = allLists.filter(list => {
+      return list.items.some(item => item.itemName.toLowerCase().includes(searchQuery));
+    });
+
+    res.render('searchResults', { pageTitle: 'Search Results', matchingLists, searchQuery });
+  } catch (error) {
+    res.render('error', { pageTitle: 'Error', errors: error });
+  }
+});
+
 configRoutes(app);
 
 app.listen(3000, () => {
