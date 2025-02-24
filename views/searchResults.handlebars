@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="/public/css/styles.css">
+</head>
+<body>
+    <h1>{{pageTitle}}</h1>
+    <h2>Matching Grocery Lists for "{{searchQuery}}"</h2>
+    {{#if matchingLists.length}}
+    <ul>
+        {{#each matchingLists}}
+        <li>{{this.groceryName}}</li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No matching lists found.</p>
+    {{/if}}
+    <a href="/users/profile">Back to Profile</a>
+</body>
+</html>
