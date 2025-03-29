@@ -1,5 +1,5 @@
 {
-  "name": "cs546-final-project",
+  "name": "Grocery-Genie-V2",
   "version": "1.0.0",
   "description": "Our Final Project",
   "main": "app.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nappilil/CS546-Final-Project.git"
+    "url": "git+https://github.com/nappilil/Grocery-Genie-V2.git"
   },
-  "author": "Aditi Deshmukh, Shannon McGratty, Lilli Nappi, Dani Qira, Renny Victoria",
+  "author": "Shannon McGratty, Lilli Nappi, Liz Bruski",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nappilil/CS546-Final-Project/issues"
+    "url": "https://github.com/nappilil/Grocery-Genie-V2.git/issues"
   },
-  "homepage": "https://github.com/nappilil/CS546-Final-Project#readme",
+  "homepage": "https://github.com/nappilil/Grocery-Genie-V2.git#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "email-validator": "^2.0.4",
