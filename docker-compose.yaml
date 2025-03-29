@@ -1,0 +1,13 @@
+version: '3' 
+services: # services which our app going to use. (list of containers we want to create)
+  mongo: # container name 
+    image: mongo # On which image container will build
+    ports:
+      - "27017:27017"
+    
+  api-server:
+    image: api-server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo

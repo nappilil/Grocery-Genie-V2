@@ -1,4 +1,4 @@
 export const mongoConfig = {
-    serverUrl: 'mongodb://localhost:27017/',
-    database: 'groceryGenie'
+    serverUrl: 'mongodb://mongo:27017/',
+    database: 'groceryGenieV2'
   };

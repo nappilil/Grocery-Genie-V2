@@ -1,38 +1,27 @@
-# Grocery Genie Application
+# Grocery Genie v2
 
-## Github Repo
-[https://github.com/nappilil/CS546-Final-Project](https://github.com/nappilil/CS546-Final-Project)
+## To Run the Application Through Docker
+1. 
+```bash
+docker build -t "api-server" .
+```
+2. 
+```bash
+docker-compose up```
+```
 
-![Grocery Genie Example](public/assets/grocery-genie.PNG)
-
-## Team Members
-- Aditi Deshmukh
-- Shannon McGratty
-- Lilli Nappi
-- Dani Qira
-- Renny Victoria
-
-## Packages
-Must be installed first:
+## To Run the Application Locally
+```bash
+npm i
 ```
-npm i bcrypt
-npm i email-validator
-npm i express
-npm i express-handlebars
-npm i express-session
-npm i mongodb
-npm i seed
-npm i xss
-```
-## Seed File
-To populate database:
-```
-npm run seed
-```
-## Run File
-To start the application run this command:
-```
+2. 
+```bash
 npm start
+```
+
+## To Seed The File
+```bash
+npm run seed
 ```
 ## Server
 Routes will be running on:
