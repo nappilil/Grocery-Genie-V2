@@ -1,4 +1,7 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 export const mongoConfig = {
-    serverUrl: 'mongodb://mongo:27017/',
+    serverUrl: process.env.MONGO_URI,
     database: 'groceryGenieV2'
   };

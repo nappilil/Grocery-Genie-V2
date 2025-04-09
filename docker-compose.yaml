@@ -1,13 +1,20 @@
-version: '3' 
-services: # services which our app going to use. (list of containers we want to create)
-  mongo: # container name 
-    image: mongo # On which image container will build
+version: '3.8'  
+
+services:
+  mongo:
+    image: mongo:latest  
     ports:
       - "27017:27017"
-    
+    volumes:
+      - mongo-data:/data/db  # Persist data even if container restarts
+    restart: unless-stopped  # Automatically restart unless explicitly stopped
+
   api-server:
-    image: api-server
+    image: api-server:latest  
     ports:
       - "3000:3000"
     depends_on:
       - mongo
+    env_file:
+      - .env.docker
+    restart: unless-stopped
