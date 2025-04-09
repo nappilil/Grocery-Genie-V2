@@ -141,7 +141,7 @@ const exportedMethods = {
     if (!targetListID) throw `You must provide an list id`;
     if (!ObjectId.isValid(targetListID)) throw `invalid list Id`;
 
-    checkString(itemName);
+    itemName = checkString(itemName);
     itemName = itemName.trim();
 
     const groceryListList = await groceryLists();
