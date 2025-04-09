@@ -34,6 +34,11 @@ router.route('/createItem')
     let comments = xss(newItemData.comments);
     let errors = [];
     try {
+      listId = checkId(listId, "List Id")
+    } catch (e) {
+      return res.status(200).redirect('/household/info');
+    }
+    try {
       itemName = checkString(itemName, "Item Name")
     } catch (e) {
       errors.push(e);
@@ -101,7 +106,16 @@ router.route('/createItem')
 
     const successMessage = req.session.successMessage;
     delete req.session.successMessage;
-
+    try {
+      itemId = checkId(itemId, "Item Id");
+    } catch (e) {
+      errors.push(e);
+    }
+    try {
+      listId = checkId(listId, "List Id")
+    } catch (e) {
+      return res.status(200).redirect('/household/info');
+    }
     try {
       // Retrieve the item data
       const item = await groceryItemsData.getItemById(itemId);
@@ -129,7 +143,16 @@ router.route('/editItem/:id')
     //console.log('item id', itemId);
     const successMessage = req.session.successMessage;
     delete req.session.successMessage;
-
+    try {
+      itemId = checkId(itemId, "Item Id");
+    } catch (e) {
+      errors.push(e);
+    }
+    try {
+      listId = checkId(listId, "ListId"); // extra error checking
+    } catch (e) {
+      console.log(e)
+    }
     let oldData;
     try {
       oldData = await groceryItemsData.getItemById(itemId);
@@ -167,6 +190,11 @@ router.route('/editItem/:id')
       nlistId = checkId(nlistId, "List Id")
     } catch (e) {
       return res.status(200).redirect('/household/info');
+    }
+    try {
+      itemId = checkId(itemId, "Item Id");
+    } catch (e) {
+      errors.push(e);
     }
     try {
       itemName = checkString(itemName, "Item Name")
@@ -234,7 +262,11 @@ router.route('/deleteItem/:id')
     //console.log(listId);
     const successMessage = req.session.successMessage;
     delete req.session.successMessage;
-
+    try {
+      listId = checkId(listId, "List Id")
+    } catch (e) {
+      return res.status(200).redirect('/household/info');
+    }
     try {
       itemId = checkId(itemId, "Item Id");
     } catch (e) {
@@ -262,10 +294,14 @@ router.route('/deleteItem/:id')
     let deleteItem;
     let errors = [];
     try {
+      listId = checkId(listId, "List Id")
+    } catch (e) {
+      return res.status(200).redirect('/household/info');
+    }
+    try {
       itemId = checkId(itemId, "Item Id");
     } catch (e) {
       errors.push(e);
-      
     }
     try {
       deleteItem = await groceryItemsData.deleteLItem(listId, itemId, user.userId);
