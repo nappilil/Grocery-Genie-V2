@@ -121,6 +121,11 @@ router.route('/:id')
       errors.push(e);
     }
     try {
+      comment = checkString(comment, "Comment");
+    } catch (e) {
+      errors.push(e)
+    }
+    try {
       if (comment.trim() === "") {
         return res.status(400).redirect('/groceryLists/' + listId)      
       }
