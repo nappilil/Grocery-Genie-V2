@@ -99,18 +99,15 @@ router.route('/:id')
       res.status(500).render('error', { pageTitle: 'Error', errors: e, authenticated: true, household: true });
     }
   })
-  .post(async(req, res) => {
+  .post(async (req, res) => {
     let comment = xss(req.body.comment);
     //console.log(req.body);
     //console.log(req.session);
-    let listId = req.params.id; 
-    let itemId = xss(req.body.itemId); 
+    let listId = req.params.id;
+    let itemId = xss(req.body.itemId);
 
-    if (comment.trim() === ""){
-      res.redirect(`${listId}`);
-    }
     //console.log(listId);
-    let errors = []; 
+    let errors = [];
     let user = req.session.user;
     let userId = user.userId;
     try {
@@ -118,8 +115,20 @@ router.route('/:id')
     } catch (e) {
       errors.push(e);
     }
+    try {
+      itemId = checkId(itemId.toString(), "Item Id");
+    } catch (e) {
+      errors.push(e);
+    }
+    try {
+      if (comment.trim() === "") {
+        return res.status(400).redirect('/groceryLists/' + listId)      
+      }
+    } catch (e) {
+      errors.push(e);
+    }
     //console.log("in routes");
-    let newComment; 
+    let newComment;
     //console.log(listId);
     if (errors.length > 0) {
       res.status(400).render('groceryList/single', {
@@ -132,21 +141,21 @@ router.route('/:id')
       });
       return;
     }
-    try{
+    try {
       newComment = await commentsData.newComment(userId, listId, itemId, comment);
       //console.log(newComment);
       if (newComment.acknowledged === false) throw 'Error: unable to add comment';
-      return res.status(200).redirect('/groceryLists/'+listId);
-    } catch (error){
+      return res.status(200).redirect('/groceryLists/' + listId);
+    } catch (error) {
       //errors.push(e);
       return res.status(500).render('error', { pageTitle: 'Error', errors: error, authenticated: true, household: true });
     }
   })
 
 router.route('/delete')
-.get(async (req, res) => {
-  return res.redirect('household/info');
-})
+  .get(async (req, res) => {
+    return res.redirect('household/info');
+  })
 
 router.route('/edit/:id')
   .get(async (req, res) => {
