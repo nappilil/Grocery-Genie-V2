@@ -2,7 +2,7 @@
 
 ## To Run the Application Through Docker
 ```bash
-docker build -t "api-server" .
+docker build --no-cache .
 ```
 ```bash
 docker-compose up

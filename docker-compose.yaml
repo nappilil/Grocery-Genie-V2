@@ -10,6 +10,7 @@ services:
     restart: unless-stopped  # Automatically restart unless explicitly stopped
 
   api-server:
+    build: .
     image: api-server:latest  
     ports:
       - "3000:3000"
@@ -18,3 +19,6 @@ services:
     env_file:
       - .env.docker
     restart: unless-stopped
+
+volumes:
+  mongo-data:

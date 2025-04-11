@@ -1,7 +1,7 @@
 import { household, users } from '../config/mongoCollections.js'; // import collection
 import { checkEmail, checkPasswordSignUp, checkName, checkAge, checkId, checkPasswordLogin, checkString } from '../validation.js'
 import { ObjectId } from 'mongodb';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const exportedMethods = {
   async getUserById(id) {
