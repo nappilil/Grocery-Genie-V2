@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/nappilil/Grocery-Genie-V2.git#readme",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "dotenv": "^16.4.7",
     "email-validator": "^2.0.4",
     "express": "^4.19.2",
