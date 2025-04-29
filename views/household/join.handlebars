@@ -2,6 +2,7 @@
 <h1>{{pageTitle}}</h1>
 <p>Please Enter Details Here:</p>
 <form action="/household/join" method="POST" class="join-form" id="join-form">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
   <label for="householdName">
     <input type="text" name="householdName" placeholder="Household Name" value="{{user.householdName}}" id="householdName">
   </label>

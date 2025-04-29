@@ -24,18 +24,8 @@ const exportedMethods = {
     const userMember = await userData.getUserById(userId);
     if (!userMember) throw `User could not be found`;
 
-    let dateCreated = new Date();
-    let day = dateCreated.getUTCDate();
-    let month = dateCreated.getUTCMonth() + 1;
-    const year = dateCreated.getUTCFullYear();
-    if (month.toString().length === 1) {
-      month = "0" + month;
-    }
-    if (day.toString().length === 1) {
-      day = "0" + day;
-    }
-    dateCreated = month + "/" + day + "/" + year;
-
+    let dateCreated = new Date().toLocaleString()
+    
     const newList = {
       userId: userId,
       userName: userMember.firstName + " " + userMember.lastName,

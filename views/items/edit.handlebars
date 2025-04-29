@@ -3,6 +3,7 @@
     <div class="editItem">
         <p> Insert information in fields you would like to modify.</p>
         <form action="/items/editItem/{{itemId}}?listId={{listId}}" method="POST" class="editItem-form" id="editItem">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <input type="hidden" id="listId" name="listId" value="{{listId}}">
             <input type="hidden" id="itemId" name="itemId" value="{{itemId}}">
             <label for="itemName">Item Name:</label><br>

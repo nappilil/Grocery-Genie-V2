@@ -3,49 +3,40 @@
     <h1>{{pageTitle}}</h1>
     <p>Please Enter Details Here:</p>
     <form action="/users/signup" method="POST" class="signup-form" id="signup">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div>
         <label for="firstName">
           <input type="text" name="firstName" placeholder="First Name" value="{{user.firstName}}" id="firstName">
         </label>
-        <div id="ferror" class="error"></div>
+        <p id="ferror" class="error hidden"></p>
       </div>
       <div>
         <label for="lastName">
           <input type="text" name="lastName" placeholder="Last Name" value="{{user.lastName}}" id="lastName">
         </label>
-        <div id="lerror" class="error"></div>
+        <p id="lerror" class="error hidden"></p>
       </div>
       <div>
         <label for="email">
           <input type="text" name="email" placeholder="Email Address" value="{{user.email}}" id="email">
         </label>
-        <div id="eerror" class="error"></div>
+        <p id="eerror" class="error hidden"></p>
       </div>
       <div>
         <label for="password">
           <input type="password" name="password" placeholder="Password" value="{{user.password}}" id="password">
         </label>
-        <div id="perror" class="error"></div>
+        <p id="perror" class="error hidden"></p>
       </div>
       <div>
         <label for="age">
-          <input type="number" name="age" min="13" placeholder="Age" value="{{user.age}}" id="age">
+          <input type="number" name="age" min="13" max="100" placeholder="Age" value="{{user.age}}" id="age">
         </label>
-        <div id="aerror" class="error"></div>
+        <p id="aerror" class="error hidden"></p>
       </div>
-      <div id="error_div" class="error"> </div>
       <input type="submit" id="submit-button">
-      <input type="reset" id="reset-button">
+      <div id="signup-error" class="error hidden"></div>
     </form>
     <script src="/public/js/sign_up.js"></script>
   </div>
-  {{#if hasErrors}}
-  <ul class="error-list">
-    {{#each errors}}
-    <li>
-      {{this}}
-    </li>
-    {{/each}}
-  </ul>
-  {{/if}}
 </div>

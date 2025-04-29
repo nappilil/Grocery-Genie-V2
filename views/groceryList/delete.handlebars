@@ -2,6 +2,7 @@
     <h1>{{pageTitle}}</h1>
     <div class="deleteList">
         <form action="/groceryLists/delete/{{listId}}" method="POST" class="deleteList-form" id="deleteList">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <input type="hidden" id="listId" value="{{listId}}">
             <p>Are You Sure You Want To Delete This List?</p>
             <input type="submit" value="Delete List">

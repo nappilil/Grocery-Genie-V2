@@ -2,11 +2,11 @@
 <h1>{{pageTitle}}</h1>
 <p>Please Enter Details Here:</p>
 <form action="/household/create" method="POST" class="create-form" id="create-form">
+  <input type="hidden" name="_csrf" value="{{csrfToken}}">
   <label for="householdName">
     <input type="text" name="householdName" placeholder="Household Name" value="{{user.householdName}}" id="householdName">
   </label>
   <input type="submit" id="submit-button">
-  <input type="reset" id="reset-button">
 </form>
 {{#if hasErrors}}
   <ul class="error-list">

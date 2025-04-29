@@ -13,11 +13,12 @@ router.route('/new')//hasn't been tested
         user,
         authenticated: true,
         household: true,
-        hasErrors: true
+        hasErrors: true,
+        csrfToken: req.csrfToken()
       });
     } catch (e) {
       console.error('Error displaying new grocery list form:', e);
-      res.status(500).render('error', { pageTitle: 'Error', errors: e, authenticated: true, household: true });
+      res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: e, authenticated: true, household: true });
     }
   })
   .post(async (req, res) => {
@@ -50,7 +51,8 @@ router.route('/new')//hasn't been tested
         hasErrors: true,
         groceryList: newListData,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -61,7 +63,7 @@ router.route('/new')//hasn't been tested
       return res.redirect(`/items/createItem?listId=${newListInfo._id}`);
     } catch (error) {
       // Handle errors appropriately, for example, render an error page
-      res.status(500).render('error', { pageTitle: 'Error', errors: error, authenticated: true, household: true });
+      res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: error, authenticated: true, household: true });
     }
   });
 
@@ -79,7 +81,8 @@ router.route('/:id')
         errors: errors,
         hasErrors: true,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       })
       return;
     }
@@ -92,11 +95,12 @@ router.route('/:id')
         authenticated: true,
         household: true,
         groceryList,
-        listId
+        listId,
+        csrfToken: req.csrfToken(),
       });
     } catch (e) {
       //console.error('Error fetching grocery list:', e);
-      res.status(500).render('error', { pageTitle: 'Error', errors: e, authenticated: true, household: true });
+      res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: e, authenticated: true, household: true });
     }
   })
   .post(async (req, res) => {
@@ -142,7 +146,8 @@ router.route('/:id')
         hasErrors: true,
         listId: listId,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
       return;
     }
@@ -153,7 +158,7 @@ router.route('/:id')
       return res.status(200).redirect('/groceryLists/' + listId);
     } catch (error) {
       //errors.push(e);
-      return res.status(500).render('error', { pageTitle: 'Error', errors: error, authenticated: true, household: true });
+      return res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: error, authenticated: true, household: true });
     }
   })
 
@@ -186,7 +191,8 @@ router.route('/edit/:id')
         listId: listId,
         groceryList: groceryList,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
       return;
     }
@@ -197,11 +203,12 @@ router.route('/edit/:id')
         authenticated: true,
         groceryList: groceryList,
         listId: listId,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
     } catch (e) {
       //console.error('Error displaying edit grocery list form:', e);
-      return res.status(500).render('error', { pageTitle: "Error", errors: e, authenticated: true, household: true });
+      return res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: "Error", errors: e, authenticated: true, household: true });
     }
   })
   .post(async (req, res) => {
@@ -248,7 +255,8 @@ router.route('/edit/:id')
         groceryList: newListData,
         listId: listId,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
       return;
     }
@@ -259,7 +267,7 @@ router.route('/edit/:id')
       return res.status(200).redirect('/users/profile');
     } catch (error) {
       // Handle errors appropriately, for example, render an error page
-      return res.status(500).render('error', { pageTitle: 'Error', errors: error, authenitcated: true, household: true });
+      return res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: error, authenitcated: true, household: true });
     }
   })
 
@@ -288,7 +296,8 @@ router.route('/delete/:id')
         listId: listId,
         groceryList: groceryList,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
       return;
     }
@@ -299,12 +308,13 @@ router.route('/delete/:id')
         authenticated: true,
         groceryList: groceryList,
         listId: listId,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
       return;
     } catch (e) {
       //console.error('Error displaying edit grocery list form:', e);
-      return res.status(500).render('error', { pageTitle: "Error", errors: e, authenticated: true, household: true });
+      return res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: "Error", errors: e, authenticated: true, household: true });
     }
   })
   .post(async (req, res) => {
@@ -331,7 +341,8 @@ router.route('/delete/:id')
         groceryList: groceryList,
         listId: listId,
         authenticated: true,
-        household: true
+        household: true,
+        csrfToken: req.csrfToken(),
       });
       return;
     }
@@ -340,7 +351,7 @@ router.route('/delete/:id')
       if (!del) throw `Error: Could not delete grocery list`;
       return res.status(200).redirect('/users/profile');
     } catch (e) {
-      return res.status(500).render('error', { pageTitle: 'Error', errors: e, authenticated: true, household: true });
+      return res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: e, authenticated: true, household: true });
     }
   })
 

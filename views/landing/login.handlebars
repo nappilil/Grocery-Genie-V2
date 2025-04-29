@@ -3,31 +3,23 @@
     <h1>{{pageTitle}}</h1>
     <p>Please Enter Details Here:</p>
     <form action="/users/login" method="POST" class="login-form" id="login-form">
+      <input type="hidden" name="_csrf" value="{{csrfToken}}">
       <div>
         <label for="email">
           <input type="text" name="email" placeholder="Email Address" value="{{user.email}}" id="email">
         </label>
-        <div id="eerror" class="error"></div>
+        <p id="eerror" class="error hidden"></p>
       </div>
       <div>
         <label for="password">
           <input type="password" name="password" placeholder="Password" value="{{user.password}}" id="password">
         </label>
-        <div id="perror" class="error"></div>
+        <p id="perror" class="error hidden"></p>
       </div>
       <div id="error_div" class="error"> </div>
       <input type="submit" id="submit-button">
-      <input type="reset" id="reset-button">
+      <div id="login-error" class="error hidden"></div>
     </form>
     <script src="/public/js/log_in.js"></script>
   </div>
-  {{#if hasErrors}}
-  <ul class="error-list">
-    {{#each errors}}
-    <li>
-      {{this}}
-    </li>
-    {{/each}}
-  </ul>
-  {{/if}}
 </div>

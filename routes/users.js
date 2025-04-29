@@ -16,7 +16,8 @@ router.route('/signup')
     res.status(200).render('landing/signup', {
       pageTitle: 'Sign Up',
       authenticated: false,
-      household: false
+      household: false,
+      csrfToken: req.csrfToken()
     });
   })
   .post(async (req, res) => {
@@ -70,6 +71,7 @@ router.route('/signup')
         user: newUserData,
         authenticated: false,
         household: false,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -93,7 +95,8 @@ router.route('/signup')
         hasErrors: true,
         user: newUserData,
         authenticated: false,
-        household: false
+        household: false,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -104,7 +107,8 @@ router.route('/login')
     res.status(200).render('landing/login', {
       pageTitle: 'Log In',
       authenticated: false,
-      household: false
+      household: false,
+      csrfToken: req.csrfToken()
     });
   })
   .post(async (req, res) => {
@@ -133,7 +137,8 @@ router.route('/login')
         hasErrors: true,
         user: userLogInData,
         authenticated: false,
-        household: false
+        household: false,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -157,7 +162,8 @@ router.route('/login')
         hasErrors: true,
         user: userLogInData,
         authenticated: false,
-        household: false
+        household: false,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -178,7 +184,8 @@ router.route('/profile')
         errors: e,
         hasErrors: true,
         authenticated: true,
-        household: household
+        household: household,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -196,7 +203,8 @@ router.route('/profile')
           errors: e,
           hasErrors: true,
           authenticated: true,
-          household: household
+          household: household,
+          csrfToken: req.csrfToken()
         });
         return;
       }
@@ -207,13 +215,14 @@ router.route('/profile')
       authenticated: true,
       user: userProfile, // render userprofile
       groceryList: groceryList,
-      household: household
+      household: household,
+      csrfToken: req.csrfToken()
     });
   })
   .post(async (req, res) => {
     const user = req.session.user;
     let announcementComment = req.body;
-    if (announcementComment.comment.trim()===""){
+    if (announcementComment.comment.trim() === "") {
       return res.redirect('profile');
     }
     let comment = xss(announcementComment.comment);
@@ -232,7 +241,8 @@ router.route('/profile')
         errors: e,
         hasErrors: true,
         authenticated: true,
-        household: household
+        household: household,
+        csrfToken: req.csrfToken()
       });
       return;
     }
@@ -243,27 +253,27 @@ router.route('/profile')
       return res.status(200).redirect('/users/profile');
     } catch (error) {
       // Handle errors appropriately, for example, render an error page
-      return res.status(500).render('error', { pageTitle: 'Error', errors: error, authenitcated: true, household: household });
+      return res.status(500).render('error', { csrfToken: req.csrfToken(), pageTitle: 'Error', errors: error, authenitcated: true, household: household });
     }
-    
   });
 
 router.route('/logout').get(async (req, res) => {
-  //code here for GET
   const user = req.session.user;
-  let household = false;
-  if (user.householdName.length !== 0) {
-    household === true;
+  if (user) {
+    let household = false;
+    if (user.householdName.length !== 0) {
+      household === true;
+    }
+    res.status(200).render('users/logout', {
+      pageTitle: 'Logout',
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      themePreference: req.session.user.themePreference,
+      authenticated: false,
+      household: household
+    });
+    req.session.destroy();
   }
-  res.status(200).render('users/logout', {
-    pageTitle: 'Logout',
-    firstName: req.session.user.firstName,
-    lastName: req.session.user.lastName,
-    themePreference: req.session.user.themePreference,
-    authenticated: false,
-    household: household
-  });
-  req.session.destroy();
 });
 
 
