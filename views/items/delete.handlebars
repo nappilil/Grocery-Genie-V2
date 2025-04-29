@@ -3,6 +3,7 @@
     <div class="deleteItem">
         <h2> Are you sure you would like to delete this item?</h2>
         <form action="/items/deleteItem/{{itemId}}?listId={{listId}}" method="POST" class="deleteItem-form" id="deleteItem">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <input type="hidden" id="listId" name="listId" value="{{listId}}">
             <input type="hidden" id="itemId" name="itemId" value="{{itemId}}">
             <input type="submit" value="Submit">

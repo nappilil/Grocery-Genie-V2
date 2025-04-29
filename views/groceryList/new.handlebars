@@ -2,6 +2,7 @@
     <h1>{{pageTitle}}</h1>
     <div class="newList">
         <form action="/groceryLists/new" method="POST" class="newList-form" id="newList">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <label for="groceryName">Grocery List Name:</label><br>
             <input type="text" id="groceryName" name="groceryName" value="{{groceryList.groceryName}}"><br>
             <label for="listType">List Type:</label><br>

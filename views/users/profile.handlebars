@@ -57,28 +57,24 @@
 <ul class="announcements-list">
     {{#each user.announcements}}
     <li class="announcements-post">
-        <ul>
-            <li>{{this.announcement}}</li>
-            {{#if this.comment.length}}
-            <li>{{this.comment}}</li>
-            {{else}}
-            <!-- Only show the form if there are no comments -->
-            <form method="POST" id="announcement-form">
-                <label for="comment">
-                    <textarea name="comment" placeholder="Leave A Comment" id="comment"
-                        value="{{this.comment}}"></textarea><br>
-                </label>
-                <input type="hidden" id="announcementId" name="announcementId" value="{{this._id}}">
-                <button type="submit">Submit</button>
-            </form>
-            <div id="error-output"></div>
-            <script src="../public/js/announcements.js"></script>
-            {{/if}}
-            <i>{{this.currentDate}}</i>
-        </ul>
+        <p>{{this.announcement}}</p>
+        {{#unless this.comment.length}}
+        <form method="POST" action="/users/profile" class="announcement-form">
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <input type="hidden" name="announcementId" value="{{this._id}}">
+            <textarea name="comment" placeholder="Leave A Comment">{{this.comment}}</textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="error-output"></div>
+        {{/unless}}
+        {{#if this.comment.length}}
+        <p>{{this.comment}}</p>
+        {{/if}}
+        <i>{{this.currentDate}}</i>
     </li>
     {{/each}}
 </ul>
+<script src="../public/js/announcements.js"></script>
 {{else}}
 <p>No Announcements Yet!</p>
 {{/if}}

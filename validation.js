@@ -89,6 +89,7 @@ const checkPasswordSignUp = (password, varName) => {
     throw `Error: ${varName} must be at least 8 chars, has one upper and lower case letter, 1 digit, & contains at least one special character`;
   if (password.length < 8)
     throw `Error: ${varName} must be at least 8 chars, has one upper and lower case letter, 1 digit, & contains at least one special character`;
+  if (password.length > 50) throw `Error: ${varName} cannot be that long`
   if (!isNaN(password)) // only numbers
     throw `Error: ${varName} must be at least 8 chars, has one upper and lower case letter, 1 digit, & contains at least one special character`;
   // https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a

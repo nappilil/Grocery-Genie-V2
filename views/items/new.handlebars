@@ -2,6 +2,7 @@
     <h1>{{pageTitle}}</h1>
     <div class="newItem">
         <form action="/items/createItem" method="POST" class="newItem-form" id="newItem">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <input type="hidden" id="listId" name="listId" value="{{listId}}">
             <input type="hidden" id="userId" name="userId" value="{{user.userId}}">
             <label for="itemName">Item Name:</label><br>

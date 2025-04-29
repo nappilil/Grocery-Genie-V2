@@ -164,7 +164,8 @@
     let age = $('#age').val();
     let email = $('#email').val();
     let password = $('#password').val();
-
+    let csrfToken = $('input[name="_csrf"]').val();
+    
     try {
       checkName(firstname, 'First Name');
       checkName(lastname, 'Last Name');
@@ -182,7 +183,8 @@
           lastName: lastname,
           age: age,
           email: email,
-          password: password
+          password: password,
+          _csrf: csrfToken
         })
       }).done(function (response) {
 

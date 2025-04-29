@@ -10,7 +10,7 @@ body {
 
 main {
     padding: 15px;
-    background-color:  #f0f7f0;
+    background-color: #f0f7f0;
     max-width: 75%;
     margin: 60px auto;
 }
@@ -49,6 +49,19 @@ textarea {
 
 .error-list {
     text-align: left;
+    list-style: none;
+    color: red;
+    font-size: 10pt;
+}
+
+.error {
+    color: #c0392b;
+    font-size: .9em;
+    margin: 4px 0 12px;
+}
+
+.hidden {
+    display: none;
 }
 
 .members-list {
@@ -285,6 +298,13 @@ a {
 .error {
     color: red;
     font-size: 10pt;
+    text-decoration: none;
+}
+
+.perror {
+    color: red;
+    font-size: 10pt;
+    text-decoration: none;
 }
 
 .hidden {

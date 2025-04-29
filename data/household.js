@@ -132,16 +132,7 @@ const exportedMethods = {
     // Make New Announcement
     const announcement = userMember.firstName + " " + userMember.lastName + " joined the household!"
     let currentDate = new Date(), groceryList = [], groceryItem = "", action = "join", comment = "";
-    let day = currentDate.getUTCDate()
-    let month = currentDate.getUTCMonth() + 1
-    const year = currentDate.getUTCFullYear();
-    if (month.toString().length === 1) {
-      month = "0" + month;
-    }
-    if (day.toString().length === 1) {
-      day = "0" + day;
-    }
-    currentDate = month + "/" + day + "/" + year;
+    currentDate = currentDate.toLocaleString();
 
     const newAnnouncement = {
       action, // might get rid of this 

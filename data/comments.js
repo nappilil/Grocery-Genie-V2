@@ -28,7 +28,7 @@ const exportedMethods = {
     text = checkComment(text, "Comment");
     text = text.trim(); 
     const commentCollection = await comments(); 
-    const date = new Date();
+    const date = new Date().toLocaleString()
     const entry = {
       userId,
       text,

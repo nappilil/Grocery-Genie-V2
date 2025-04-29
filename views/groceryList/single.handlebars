@@ -1,38 +1,42 @@
-<div class = "single-list-view">
-    <h1>{{groceryList.groceryName}}</h1>
-    <p>List Type: {{groceryList.listType}}</p>
-    <ul class ="list-items">
-        {{#each groceryList.items}}
-        <li>
-            <div class ='itemname'>{{itemName}}</div>
-            <div class="item-info">
-                Quantity: {{quantity}} | Priority: {{priority}} | Category: {{category}} 
-                <br>
-                <form method="POST" id="comment-form">
-                    {{#if comments.length}}
-                    {{#each comments}}
-                <ul>
-                    <li><p>{{comments}}<br></p><p class="commenter">{{name}}</p></li>
-                </ul>
-                    {{/each}}
-                    {{/if}}
-                    <label for="comment">
-                    <textarea name="comment" placeholder="Leave A Comment" id="commentbox"
-                        value="{{this.comment}}"></textarea><br>
-                </label>
-                <input type="hidden" id="itemId" name="itemId" value="{{_id}}">
-                <button type="submit">Submit</button>
-            </form>
-            </div> 
-            <div class = "links">
-                <a href="/items/increaseQ/{{_id}}?listId={{../groceryList._id}}" class="edit-link">Quantity +1</a>
-                <a href="/items/editItem/{{_id}}?listId={{../groceryList._id}}" class="edit-link">Edit</a>
-                <a href="/items/deleteItem/{{_id}}?listId={{../groceryList._id}}">Delete</a>
-            </div>
-        {{/each}}
-        </li>
-    </ul>
+<div class="single-list-view">
+  <h1>{{groceryList.groceryName}}</h1>
+  <p>List Type: {{groceryList.listType}}</p>
+  <ul class="list-items">
+    {{#each groceryList.items}}
+      <li>
+        <div class='itemname'>{{itemName}}</div>
+        <div class="item-info">
+          Quantity: {{quantity}} | Priority: {{priority}} | Category: {{category}}<br>
 
-    <a href="/items/createItem?listId={{listId}}">Add New Item</a><br>
-    <a href="/household/info">Back to My Household</a>
+          <form method="POST" action="/groceryLists/{{../listId}}" class="comment-form">
+            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            <input type="hidden" name="itemId" value="{{_id}}">
+
+            {{#each comments}}
+              <ul>
+                <li>
+                  <p>{{this.comments}}</p>
+                  <p class="commenter">{{this.name}}</p>
+                </li>
+              </ul>
+            {{/each}}
+
+            <label for="commentbox-{{@index}}" value="{{this.comment}}">Leave A Comment</label><br>
+            <textarea name="comment" id="commentbox-{{@index}}" placeholder="Leave a comment"></textarea><br>
+
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+
+        <div class="links">
+          <a href="/items/increaseQ/{{_id}}?listId={{../listId}}" class="edit-link">Quantity +1</a>
+          <a href="/items/editItem/{{_id}}?listId={{../listId}}" class="edit-link">Edit</a>
+          <a href="/items/deleteItem/{{_id}}?listId={{../listId}}">Delete</a>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+
+  <a href="/items/createItem?listId={{listId}}">Add New Item</a><br>
+  <a href="/household/info">Back to My Household</a>
 </div>

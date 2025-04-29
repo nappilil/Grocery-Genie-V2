@@ -20,11 +20,14 @@
   "homepage": "https://github.com/nappilil/Grocery-Genie-V2.git#readme",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "csurf": "^1.2.2",
     "dotenv": "^16.4.7",
     "email-validator": "^2.0.4",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
+    "helmet": "^8.1.0",
     "mongodb": "^6.6.1",
     "seed": "^0.4.4",
     "xss": "^1.0.15"

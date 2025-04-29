@@ -14,7 +14,7 @@
         event.preventDefault();
 
         let comment = $('#comment').val();
-
+        let csrfToken = $('input[name="_csrf"]').val();
         try {
             comment = checkString(comment, 'Comment');
             $.ajax({
@@ -23,6 +23,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     comment: comment,
+                    _csrf: csrfToken
                 })
             }).done(function (response) {
                 window.location.href = '/users/profile';

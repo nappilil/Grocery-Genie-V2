@@ -3,6 +3,28 @@ const app = express();
 import configRoutes from './routes/index.js';
 import exphbs from 'express-handlebars';
 import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import csurf from 'csurf';
+import helmet from 'helmet';
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: true,
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      objectSrc: ["'none'"]
+    }
+  }
+}));
+
+app.use((req, res, next) => {
+  const ua = req.get('User-Agent') || '';
+  if (ua.length > 256) return res.status(400).send("Bad User-Agent");
+  next();
+});
 
 app.use('/public', express.static('public'));
 app.use(express.json());
@@ -10,14 +32,30 @@ app.use(express.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
+app.use(cookieParser());
+
 app.use(
   session({
     name: 'AuthenticationState',
     secret: "This is a secret.. shhh don't tell anyone",
     saveUninitialized: false,
     resave: false,
+    cookie: {
+      httpOnly: true,
+      sameSite: 'strict'
+    }
   })
 );
+
+// Makes CSRF token available in all templates as {{csrfToken}}
+app.use(csurf({ cookie: true }));
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
+app.disable('x-powered-by');
+
 
 /* This middleware will apply to the root route / 
 Keeping this here for future error checking

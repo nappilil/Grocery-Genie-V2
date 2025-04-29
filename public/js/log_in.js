@@ -55,7 +55,7 @@
 
         let email = $('#login-email').val();
         let password = $('#login-password').val();
-
+        let csrfToken = $('input[name="_csrf"]').val();
         try {
             checkEmail(email, 'Email Address');
             checkPasswordLogin(password, 'Password');
@@ -67,7 +67,8 @@
                 contentType: 'application/json',
                 data: JSON.stringify({
                     email: email,
-                    password: password
+                    password: password,
+                    _csrf: csrfToken
                 })
             }).done(function (response) {
 
