@@ -1,39 +1,54 @@
 <div class="single-list-view">
   <h1>{{groceryList.groceryName}}</h1>
-  <p>List Type: {{groceryList.listType}}</p>
+  <p><strong>List Type:</strong> {{groceryList.listType}}</p>
+
   <ul class="list-items">
     {{#each groceryList.items}}
-      <li>
-        <div class='itemname'>{{itemName}}</div>
-        <div class="item-info">
-          Quantity: {{quantity}} | Priority: {{priority}} | Category: {{category}}<br>
-
-          <form method="POST" action="/groceryLists/{{../listId}}" class="comment-form">
-            <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-            <input type="hidden" name="itemId" value="{{_id}}">
-
-            {{#each comments}}
-              <ul>
-                <li>
-                  <p>{{this.comments}}</p>
-                  <p class="commenter">{{this.name}}</p>
-                </li>
-              </ul>
-            {{/each}}
-
-            <label for="commentbox-{{@index}}" value="{{this.comment}}">Leave A Comment</label><br>
-            <textarea name="comment" id="commentbox-{{@index}}" placeholder="Leave a comment"></textarea><br>
-
-            <button type="submit">Submit</button>
-          </form>
+    <li class="item-card">
+      <div class="item-header">
+        <h3 class="item-name">{{itemName}}</h3>
+        <div class="item-details">
+          <div class="item-detail">
+            <strong>Quantity:</strong> {{quantity}}
+            <a href="/items/increaseQ/{{_id}}?listId={{../listId}}" class="plus-button">+1</a>
+          </div>
+          <div class="item-detail">
+            <strong>Priority:</strong> {{priority}}
+          </div>
+          <div class="item-detail">
+            <strong>Category:</strong> {{category}}
+          </div>
         </div>
+      </div>
 
-        <div class="links">
-          <a href="/items/increaseQ/{{_id}}?listId={{../listId}}" class="edit-link">Quantity +1</a>
-          <a href="/items/editItem/{{_id}}?listId={{../listId}}" class="edit-link">Edit</a>
-          <a href="/items/deleteItem/{{_id}}?listId={{../listId}}">Delete</a>
-        </div>
-      </li>
+      <div class="comments-section">
+        {{#if comments.length}}
+        <ul class="comment-list">
+          {{#each comments}}
+          <li class="comment">
+            <p class="comment-text">{{this.comments}}</p>
+            <p class="comment-author">— {{this.name}}</p>
+          </li>
+          {{/each}}
+        </ul>
+        {{/if}}
+
+        <form method="POST" action="/groceryLists/{{../listId}}" class="comment-form">
+          <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+          <input type="hidden" name="itemId" value="{{_id}}">
+
+          <label for="commentbox-{{@index}}"></label><br>
+          <textarea name="comment" id="commentbox-{{@index}}" placeholder="Write your comment here..." required></textarea><br>
+
+          <button type="submit" id="submit-button">Submit</button>
+        </form>
+      </div>
+
+      <div class="item-actions">
+        <a href="/items/editItem/{{_id}}?listId={{../listId}}" class="action-link">Edit</a>
+        <a href="/items/deleteItem/{{_id}}?listId={{../listId}}" id="delete-button" class="action-link">Delete</a>
+      </div>
+    </li>
     {{/each}}
   </ul>
 

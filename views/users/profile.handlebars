@@ -62,15 +62,17 @@
         <form method="POST" action="/users/profile" class="announcement-form">
             <input type="hidden" name="_csrf" value="{{../csrfToken}}">
             <input type="hidden" name="announcementId" value="{{this._id}}">
-            <textarea name="comment" placeholder="Leave A Comment">{{this.comment}}</textarea>
-            <button type="submit">Submit</button>
+            <textarea name="comment" id="commentbox-{{@index}}" placeholder="Write your comment here..."
+                required></textarea><br>
+            <button type="submit" id="submit-button">Submit</button>
         </form>
-        <div class="error-output"></div>
-        {{/unless}}
         {{#if this.comment.length}}
         <p>{{this.comment}}</p>
         {{/if}}
+        <br>
         <i>{{this.currentDate}}</i>
+        <div class="error-output"></div>
+        {{/unless}}
     </li>
     {{/each}}
 </ul>
