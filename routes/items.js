@@ -141,8 +141,9 @@ router.route('/createItem')
 router.route('/editItem/:id')
   .get(async (req, res) => {
     const user = req.session.user;
-    const listId = req.query.listId;
-    const itemId = req.params.id;
+    let listId = req.query.listId;
+    let itemId = req.params.id;
+    let errors = [];
     //console.log('list Id:', listId);
     //console.log('item id', itemId);
     const successMessage = req.session.successMessage;
@@ -179,8 +180,8 @@ router.route('/editItem/:id')
   })
   .post(async (req, res) => {
     // get List Id
-    const listId = req.query.listId;
-    const itemId = req.params.id;
+    let listId = req.query.listId;
+    let itemId = req.params.id;
     const newInput = req.body;
     //console.log(newInput);
     const user = req.session.user;
@@ -263,7 +264,7 @@ router.route('/editItem/:id')
 router.route('/deleteItem/:id')
   .get(async (req, res) => {
     const user = req.session.user;
-    const listId = req.query.listId;
+    let listId = req.query.listId;
     let itemId = req.params.id;
     //console.log(listId);
     const successMessage = req.session.successMessage;
@@ -294,14 +295,13 @@ router.route('/deleteItem/:id')
   })
   .post(async (req, res) => {
     const user = req.session.user;
-    const listId = req.query.listId;
-    //console.log(listId);
+    let listId = req.query.listId;
     let itemId = req.params.id;
-    //console.log(itemId);
     let deleteItem;
     let errors = [];
     try {
-      listId = checkId(listId, "List Id")
+      console.log("Checking listId:", listId);
+      listId = checkId(listId, "List Id");
     } catch (e) {
       return res.status(200).redirect('/household/info');
     }
