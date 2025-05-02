@@ -145,7 +145,7 @@ const exportedMethods = {
       { 'items._id': new ObjectId(itemId)},
       { $set: { "items.$.comments.$[comment]": updateObject }  },
       // https://www.mongodb.com/docs/manual/reference/operator/update/positional-filtered/#update-nested-arrays-in-conjunction-with----
-      {arrayFilters: [{"comment._id": commentId}],
+      {arrayFilters: [{"comment._id": new ObjectId(commentId)}],
       returnDocument: 'after' }
     );
 
