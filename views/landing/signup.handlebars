@@ -36,6 +36,15 @@
       </div>
       <input type="submit" id="submit-button">
       <div id="signup-error" class="error hidden"></div>
+      {{#if hasErrors}}
+      <ul class="error-list">
+        {{#each errors}}
+        <li>
+          {{this}}
+        </li>
+        {{/each}}
+      </ul>
+      {{/if}}
     </form>
     <script src="/public/js/sign_up.js"></script>
   </div>
