@@ -7,7 +7,9 @@ const exportedMethods = {
     action,
     comment,
     userId,
-    householdName
+    householdName,
+    groceryList,
+    groceryItem
   ) {
     action = checkString(action, 'Action');
     if (comment.length === 0) {
@@ -23,8 +25,8 @@ const exportedMethods = {
 
     const newAnnouncement = {
       action: action,
-      groceryList: groceryList,
-      groceryItem: groceryItem,
+      groceryList: groceryList || '',
+      groceryItem: groceryItem || '',
       comment: comment,
       userId: new ObjectId(userId),
       householdName: householdName,
@@ -44,7 +46,7 @@ const exportedMethods = {
   async deleteOldAnnouncement(id) {
     id = checkId(id, 'ID');
     const announcementCollection = await announcements();
-    const deleteAnnouncement = await announcementCollection.deleteOne({ _id: ObjectId(id) });
+    const deleteAnnouncement = await announcementCollection.deleteOne({ _id: new ObjectId(id) });
     if (deleteAnnouncement.deletedCount === 0) {
       throw `Could not delete announcement with id of ${id}`;
     }
@@ -68,7 +70,7 @@ const exportedMethods = {
   async deleteComment(id) {
     id = checkId(id, 'ID');
     const announcementCollection = await announcements();
-    const deleteComment = await announcementCollection.deleteOne({ _id: ObjectId(id) });
+    const deleteComment = await announcementCollection.deleteOne({ _id: new ObjectId(id) });
     if (deleteComment.deletedCount === 0) {
       throw `Could not delete comment with id of ${id}`;
     }
@@ -95,7 +97,7 @@ const exportedMethods = {
     const announcementCollection = await announcements();
     const updatedAnnouncement = await announcementCollection.updateOne(
       {
-        _id: ObjectId(id)
+        _id: new ObjectId(id)
       },
       {
         $set: { 
